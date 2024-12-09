@@ -7,7 +7,7 @@ Este projeto é um sistema de Kanban que desenvolvi como parte de um desafio té
 
 ## **2. Funcionalidades**
 * **Gerenciamento de Colunas**:
-  * Adicionar, listar e excluir colunas.
+  * Adicionar, editar e excluir colunas.
 * **Gerenciamento de Cartões**:
   * Adicionar, editar, excluir e mover cartões entre colunas.
 * **Arrastar e Soltar**:
