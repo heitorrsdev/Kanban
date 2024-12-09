@@ -9,7 +9,7 @@ Este projeto é um sistema de Kanban que desenvolvi como parte de um desafio té
 * **Gerenciamento de Colunas**:
   * Adicionar, listar e excluir colunas.
 * **Gerenciamento de Cartões**:
-  * Adicionar, editar, mover e excluir cartões entre colunas.
+  * Adicionar, editar, excluir e mover cartões entre colunas.
 * **Arrastar e Soltar**:
   * Implementação de drag-and-drop para mover cartões entre colunas.
 * **Interface Intuitiva**:

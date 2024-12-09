@@ -1,13 +1,15 @@
 <!-- navbar -->
 <div class="navbar">
-  <strong>Kanban FieldControl</strong>
+  <strong>Kanban Board</strong>
 </div>
 
 <div class="kanban-board">
   <!-- Formulário para adicionar coluna -->
-    <div class="add-column-form">
+    <div class="add-column-form flex-column">
       <input #columnTitle id="columnTitle" type="text" placeholder="New column name" />
-      <button (click)="addColumn(columnTitle.value)">Add Column</button>
+      <div>
+        <button (click)="addColumn(columnTitle.value)">Add Column</button>
+      </div>
     </div>
 
   <div class="columns" cdkDropListGroup>
