@@ -21,6 +21,11 @@ export class ColumnsService {
     return this.columnRepository.save(column);
   }
 
+  // Atualiza os detalhes de uma coluna
+  update(id: number, updateData: { title: string }) {
+    return this.columnRepository.update(id, updateData);
+  }
+  
   // Exclui uma coluna por ID
   async delete(id: number) {
     const result = await this.columnRepository.delete(id);

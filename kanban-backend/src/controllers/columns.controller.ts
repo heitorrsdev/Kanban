@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 import { ColumnsService } from '../services/columns.service';
 
 @Controller('columns')
@@ -13,6 +13,11 @@ export class ColumnsController {
   @Post()
   create(@Body() body: { title: string }) {
     return this.columnsService.create(body.title);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: number, @Body() body: { title: string }) {
+    return this.columnsService.update(id, body);
   }
 
   @Delete(':id')

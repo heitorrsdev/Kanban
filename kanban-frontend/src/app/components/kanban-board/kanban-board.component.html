@@ -21,7 +21,14 @@
       (cdkDropListDropped)="drop($event, column)"
     >
       <div id="column-title">
-        <h3>{{ column.title }}</h3>
+        <h3 (click)="enableColumnEdit(column)" *ngIf="!column.isEditing" class="pointer">{{ column.title }}</h3>
+        <div *ngIf="column.isEditing" class="flex-column">
+          <input [(ngModel)]="column.title"/>
+          <div class="flex space-between mgt-20">
+            <button (click)="cancelColumnEdit(column)">Cancel</button>
+            <button (click)="saveColumnChanges(column)">Save</button>
+          </div>
+        </div>
         <div id="x-icon" (click)="deleteColumn(column.id)"></div>
       </div>
 

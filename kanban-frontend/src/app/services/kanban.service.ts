@@ -18,20 +18,24 @@ export class KanbanService {
     return this.http.post<any>(`${this.apiUrl}/columns`, { title });
   }
 
-  deleteColumn(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/columns/${id}`);
+  updateColumn(columnId: number, title: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/columns/${columnId}`, { title });
+  }
+
+  deleteColumn(columnId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/columns/${columnId}`);
   }
 
   addCard(columnId: number, title: string, description: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/cards`, { title, description, columnId });
   }
-
-  deleteCard(cardId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/cards/${cardId}`);
-  }
-
+  
   updateCard(cardId: number, title: string, description: string): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/cards/${cardId}`, { title, description });
+  }
+  
+  deleteCard(cardId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/cards/${cardId}`);
   }
 
   moveCard(cardId: number, targetColumnId: number): Observable<any> {

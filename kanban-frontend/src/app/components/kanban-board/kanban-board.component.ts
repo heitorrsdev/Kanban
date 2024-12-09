@@ -19,6 +19,8 @@ interface Column {
   id: number;
   title: string;
   cards: Card[];
+  isEditing?: boolean;
+  previousTitle?: string;
 }
 
 @Component({
@@ -105,6 +107,27 @@ export class KanbanBoardComponent implements OnInit {
     );
 
     this.moveCard(card.id, targetColumn.id);
+  }
+
+  enableColumnEdit(column: Column): void {
+    column.previousTitle = column.title;
+    column.isEditing = true;
+  }
+
+  cancelColumnEdit(column: Column): void {
+    column.title = column.previousTitle || '';
+    column.isEditing = false;
+  }
+
+  saveColumnChanges(column: Column): void {
+    if (column.title.trim() && column.title !== column.previousTitle) {
+      this.kanbanService.updateColumn(column.id, column.title).subscribe(() => {
+        this.loadColumns();
+      });
+      column.isEditing = false;
+    } else {
+      alert('Column title cannot be empty.');
+    }
   }
 
   enableCardEdit(card: Card): void {
