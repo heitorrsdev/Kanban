@@ -29,7 +29,14 @@
             <button (click)="saveColumnChanges(column)">Save</button>
           </div>
         </div>
-        <div id="x-icon" (click)="deleteColumn(column.id)"></div>
+        <div class="dropdown">
+          <span class="dropbtn">...</span>
+          <div class="dropdown-content">
+            <a href="#" (click)="addCardForm()">Add Card</a>
+            <a href="#" (click)="deleteColumnConfirmation()">Delete Column</a>
+          </div>
+        </div>
+        <!-- <div id="x-icon" (click)="deleteColumn(column.id)"></div> -->
       </div>
 
       <!-- Formulário para adicionar card -->
