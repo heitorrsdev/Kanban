@@ -31,6 +31,11 @@ button:hover {
   background-color: #43b8b2 !important;
 }
 
+.red-hover:hover {
+  background-color: #ca0000 !important;
+  color: #fff !important;
+}
+
 input {
   margin-bottom: 8px;
   padding: 8px;
@@ -67,6 +72,10 @@ input {
 
 .mgt-20 {
   margin-top: 20px;
+}
+
+.mgb-16 {
+  margin-bottom: 16px !important;
 }
 
 /* Trash button */
