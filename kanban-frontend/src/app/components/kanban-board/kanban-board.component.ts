@@ -19,8 +19,11 @@ interface Column {
   id: number;
   title: string;
   cards: Card[];
+  // variaveis auxiliares
   isEditing?: boolean;
   previousTitle?: string;
+  isAddingCard?: boolean;
+  confirmDeleteColumn?: boolean;
 }
 
 @Component({
@@ -31,7 +34,7 @@ interface Column {
 export class KanbanBoardComponent implements OnInit {
   columns: Column[] = [];
   selectedCard: any = null; // Card selecionado para exibir no modal
-
+  
   constructor(private kanbanService: KanbanService) {}
 
   ngOnInit(): void {
@@ -51,18 +54,48 @@ export class KanbanBoardComponent implements OnInit {
     });
   }
 
-  deleteColumn(id: number) {
-    this.kanbanService.deleteColumn(id).subscribe(() => {
-      this.loadColumns();
-    });
+  deleteColumnConfirmation(column: Column) {
+    column.confirmDeleteColumn = !column.confirmDeleteColumn;
   }
 
-  addCard(columnId: number, title: string, description: string) {
-    if (!title.trim() || !description.trim()) return;
-    this.kanbanService.addCard(columnId, title, description).subscribe(() => {
+  deleteColumn(column: Column) {
+    this.kanbanService.deleteColumn(column.id).subscribe(() => {
       this.loadColumns();
     });
+    this.deleteColumnConfirmation(column);
   }
+
+  addCardForm(column: Column): void {
+    column.isAddingCard = !column.isAddingCard;
+  }
+
+  addCard(column: Column, title: string, description: string) {
+    if (!title.trim() || !description.trim()) {
+      alert('Title and description cannot be empty.');
+      return;
+    }
+  
+    const columnId = column.id;
+    // Encontra a coluna no front-end para atualização local
+    const targetColumn = this.columns.find(column => column.id === columnId);
+  
+    if (!targetColumn) {
+      console.error(`Column with ID ${columnId} not found.`);
+      return;
+    }
+  
+    this.kanbanService.addCard(columnId, title, description).subscribe((newCard) => {
+      // Atualiza localmente a coluna sem recarregar tudo
+      targetColumn.cards.push(newCard);
+  
+      // Fecha o modal de adição
+      column.isAddingCard = false;
+    }, (error) => {
+      console.error('Error adding card:', error);
+      alert('Failed to add card. Please try again.');
+    });
+  }
+  
 
   deleteCard(cardId: number) {
     this.kanbanService.deleteCard(cardId).subscribe(() => {

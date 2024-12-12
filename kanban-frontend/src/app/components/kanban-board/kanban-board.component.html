@@ -21,7 +21,11 @@
       (cdkDropListDropped)="drop($event, column)"
     >
       <div id="column-title">
-        <h3 (click)="enableColumnEdit(column)" *ngIf="!column.isEditing" class="pointer">{{ column.title }}</h3>
+        <h3 (click)="enableColumnEdit(column)" *ngIf="!column.isEditing" class="pointer">
+          {{ column.title }}
+        </h3>
+        
+        <!-- Formulário para editar coluna -->
         <div *ngIf="column.isEditing" class="flex-column">
           <input [(ngModel)]="column.title"/>
           <div class="flex space-between mgt-20">
@@ -29,32 +33,63 @@
             <button (click)="saveColumnChanges(column)">Save</button>
           </div>
         </div>
+
+        <!-- Menu dropdown -->
         <div class="dropdown">
           <span class="dropbtn">...</span>
           <div class="dropdown-content">
-            <a href="#" (click)="addCardForm()">Add Card</a>
-            <a href="#" (click)="deleteColumnConfirmation()">Delete Column</a>
+            <a href="#" (click)="addCardForm(column)">Add Card</a>
+            <a href="#" (click)="deleteColumnConfirmation(column)">Delete Column</a>
           </div>
         </div>
-        <!-- <div id="x-icon" (click)="deleteColumn(column.id)"></div> -->
       </div>
 
-      <!-- Formulário para adicionar card -->
-      <div class="add-card-form">
-        <input
-          #cardTitle
-          type="text"
-          placeholder="Card Title"
-          [attr.aria-label]="'Card Title for ' + column.title"
-        />
-        <input
-          #cardDescription
-          type="text"
-          placeholder="Card Description"
-          [attr.aria-label]="'Card Description for ' + column.title"
-        />
-        <div class="flex space-between">
-          <button (click)="addCard(column.id, cardTitle.value, cardDescription.value)">Add card</button>
+      <!-- Modal para adicionar card -->
+      <div *ngIf="column.isAddingCard" class="modal-overlay" (click)="addCardForm(column)">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <h2>Add Card</h2>
+          <div class="flex-column gap-20">
+            <div>
+              <label for="title">Title: </label>
+              <input
+                #cardTitle
+                type="text"
+                placeholder="Card Title"
+                [attr.aria-label]="'Card Title for ' + column.title"
+                id="title"
+              />
+            </div>
+            <div>
+              <label for="description">Description:</label>
+              <textarea
+                #cardDescription
+                type="text"
+                placeholder="Card Description"
+                [attr.aria-label]="'Card Description for ' + column.title"
+                id="description"
+                rows="4"
+                cols="50"
+                maxlength="5000"
+              ></textarea> <!-- Se a tag for fechada na linha de baixo ela considera o espaço entre a abertura e o fechamento -->
+            </div>
+          </div>
+          <div class="flex space-between mgt-20">
+            <button (click)="addCardForm(column)">Cancel</button>
+            <button (click)="addCard(column, cardTitle.value, cardDescription.value)">Add card</button> <!-- O ERRO ESTÁ AQUI -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal para confirmar o delete da coluna -->
+      <div *ngIf="column.confirmDeleteColumn" class="modal-overlay" (click)="deleteColumnConfirmation(column)">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <h3 class="mgb-16">
+            Are you sure you want to delete this column? This action cannot be undone and will delete all cards contained within it.
+          </h3>
+          <div class="flex space-between">
+            <button (click)="deleteColumnConfirmation(column)">Cancel</button>
+            <button (click)="deleteColumn(column)" class="red-hover">Delete</button>
+          </div>
         </div>
       </div>
 
@@ -85,7 +120,7 @@
         </div>
       </div>
 
-      <!-- Exibe o formulário para editar -->
+      <!-- Exibe o formulário para editar cards-->
       <div *ngIf="selectedCard.isEditing">
         <h2>Edit Card</h2>
         <div class="flex-column gap-20">
