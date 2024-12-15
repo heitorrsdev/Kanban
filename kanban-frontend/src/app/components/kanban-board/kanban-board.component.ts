@@ -19,7 +19,6 @@ interface Column {
   id: number;
   title: string;
   cards: Card[];
-  // variaveis auxiliares
   isEditing?: boolean;
   previousTitle?: string;
   isAddingCard?: boolean;
