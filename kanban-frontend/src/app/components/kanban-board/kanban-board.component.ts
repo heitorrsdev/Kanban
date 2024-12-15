@@ -6,15 +6,6 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
-interface Card {
-  id: number;
-  title: string;
-  description: string;
-  isEditing?: boolean;
-  previousTitle?: string;
-  previousDescription?: string;
-}
-
 interface Column {
   id: number;
   title: string;
@@ -23,6 +14,15 @@ interface Column {
   previousTitle?: string;
   isAddingCard?: boolean;
   confirmDeleteColumn?: boolean;
+}
+
+interface Card {
+  id: number;
+  title: string;
+  description: string;
+  isEditing?: boolean;
+  previousTitle?: string;
+  previousDescription?: string;
 }
 
 @Component({
