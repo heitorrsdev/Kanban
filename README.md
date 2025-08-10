@@ -124,7 +124,7 @@ git clone https://github.com/heitorrsdev/valinor.git
 ### **Passo 2: Configurar o Backend**
 1. Entre na pasta do backend:
 ```bash
-cd .\valinor\KanbanBoard\kanban-backend\
+cd .\Kanban\kanban-backend\
 ```
 2. Instale as dependências:
 ```bash
@@ -137,7 +137,7 @@ npm run start
 ### **Passo 3**: Configurar o Frontend
 1. Abra um outro terminal e entre na pasta do frontend:
 ```bash
-cd .\valinor\KanbanBoard\kanban-frontend\
+cd .\Kanban\kanban-frontend\
 ```
 2. Instale as dependências:
 ```bash
