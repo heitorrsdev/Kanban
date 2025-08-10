@@ -1,7 +1,8 @@
 # **Sistema de Kanban**
 
 ## **1. Introdução**
-Este projeto é um sistema de Kanban que desenvolvi como parte de um desafio técnico para uma vaga de desenvolvedor full-stack (estagiário). O sistema permite a criação, gerenciamento e organização de tarefas em um formato visual, utilizando colunas e cartões, como em frameworks de produtividade amplamente utilizados.
+
+Este projeto é um sistema de Kanban que desenvolvi como parte de um desafio técnico para uma vaga de Desenvolvedor Full Stack (estagiário). O sistema permite a criação, o gerenciamento e a organização de tarefas em um formato visual, utilizando colunas e cartões, como nos frameworks de produtividade amplamente utilizados.
 
 ---
 
