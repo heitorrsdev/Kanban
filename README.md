@@ -120,7 +120,7 @@ Outras opções, como React (no frontend) e Express (no backend), foram consider
 
 ### **Passo 1: Clonar o Repositório**
 ```bash
-git clone https://github.com/heitorrsdev/valinor.git
+git clone https://github.com/heitorrsdev/Kanban.git
 ```
 ### **Passo 2: Configurar o Backend**
 1. Entre na pasta do backend:
